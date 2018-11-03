@@ -3,10 +3,13 @@ import 'phaser';
 import { Menu } from './scenes/menu';
 import { Game } from './scenes/game';
 
+const io = require('socket.io');
+
+const socket = io();
 
 const gameConfig = {
-  width: 800,
-  height: 800,
+  width: 1280,
+  height: 720,
   parent: 'root',
   pixelArt: true,
   physics: {
@@ -17,8 +20,8 @@ const gameConfig = {
       }
   },
   scene: [
-    Menu,
-    Game
+    Game,
+    Menu
   ]
 };
 

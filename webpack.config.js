@@ -13,11 +13,12 @@ export default  {
     rules: [
       {
         test: /\.js$/,
-        include: path.resolve(__dirname, 'src'),
+        include: path.resolve(__dirname, ''),
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env']
+            presets: ['env'],
+            plugins: ['transform-class-properties']
           }
         }
       },
@@ -41,6 +42,10 @@ export default  {
       }
     ]
   },
+  node: {
+    fs: 'empty'
+  },
+  target: 'node',
   plugins: [
     new CopyWebpackPlugin([
     {

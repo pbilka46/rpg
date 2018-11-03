@@ -69,7 +69,7 @@ export class Game extends Phaser.Scene {
      this.placeHouses();
      skeletons.push(this.add.existing(new Skeleton(this)));
 
-     this.cameras.main.setSize(1600, 600);
+     this.cameras.main.setSize(800, 800);
    }
 
   buildMap ()
