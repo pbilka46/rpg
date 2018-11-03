@@ -42,10 +42,6 @@ export default  {
       }
     ]
   },
-  node: {
-    fs: 'empty'
-  },
-  target: 'node',
   plugins: [
     new CopyWebpackPlugin([
     {

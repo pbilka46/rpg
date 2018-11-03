@@ -86,7 +86,6 @@ export class Skeleton extends Phaser.GameObjects.Sprite {
 
   countSteps = () => {
     this.stepsNumber++;
-    console.log(this.stepsNumber)
     if(this.stepsNumber < 20) {
       this.speed = this.speed * 1.1225;
     }

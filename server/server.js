@@ -9,7 +9,6 @@ app.use(webpackMiddleware(webpack(webpackConfig)));
 
 io.sockets.on('connection', function(socket) {
   console.log('socket');
-  console.log(socket);
 });
 
 serv.listen(4000, () => {

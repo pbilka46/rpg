@@ -3,7 +3,7 @@ import 'phaser';
 import { Menu } from './scenes/menu';
 import { Game } from './scenes/game';
 
-const io = require('socket.io');
+const io = require('socket.io-client');
 
 const socket = io();
 
