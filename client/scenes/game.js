@@ -1,5 +1,8 @@
 import 'phaser';
 import { Skeleton } from '../entities/Skeleton';
+
+const io = require('socket.io-client');
+
 var directions = {
     west: { offset: 0, x: -2, y: 0, opposite: 'east' },
     northWest: { offset: 32, x: -2, y: -1, opposite: 'southEast' },
@@ -10,6 +13,7 @@ var directions = {
     south: { offset: 192, x: 0, y: 2, opposite: 'north' },
     southWest: { offset: 224, x: -2, y: 1, opposite: 'northEast' }
 };
+
 
 var anims = {
     idle: {
@@ -52,6 +56,12 @@ export class Game extends Phaser.Scene {
     super({ key: 'game' });
   }
 
+  addPlayer = (self, playerInfo) => {
+
+
+    skeletons.push(this.add.existing(new Skeleton(this)));
+  }
+
   preload ()
   {
       this.load.json('map', './isometric-grass-and-water.json');
@@ -62,14 +72,18 @@ export class Game extends Phaser.Scene {
 
   create ()
   {
+    const self = this;
+    this.socket = io();
+    this.socket.on('players', (players) => {
+      Object.keys(players).forEach((id) => {
+        if(players[id].playerId === self.socket.id)
+          addPlayer(self, players[id]);
+      })
+    })
+    this.buildMap();
+    this.placeHouses();
 
-     //  Our Skeleton class
-
-     this.buildMap();
-     this.placeHouses();
-     skeletons.push(this.add.existing(new Skeleton(this)));
-
-     this.cameras.main.setSize(800, 800);
+    this.cameras.main.setSize(800, 800);
    }
 
   buildMap ()
@@ -123,6 +137,8 @@ export class Game extends Phaser.Scene {
   }
 
   update() {
+
+
     skeletons.forEach(function (skeleton) {
         skeleton.update();
     });
